@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "Dating App Backend - Machine Test",
+    "description": "Postman collection for Dating App backend APIs (Register, Login, Nearby Users, Chat)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"Test@123\",\n  \"gender\": \"male\",\n  \"age\": 25,\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register/",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "register"]
+        }
+      }
+    },
+    {
+      "name": "Login (JWT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"Test@123\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login/",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "login"]
+        }
+      }
+    },
+    {
+      "name": "Nearby Users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/nearby-users/?lat=28.6139&lng=77.2090",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "nearby-users"],
+          "query": [
+            { "key": "lat", "value": "28.6139" },
+            { "key": "lng", "value": "77.2090" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Send Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"receiver_id\": 2,\n  \"message\": \"Hello, how are you?\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/send-message/",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "send-message"]
+        }
+      }
+    },
+    {
+      "name": "Chat History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/chat-history/?user_id=2",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "chat-history"],
+          "query": [
+            { "key": "user_id", "value": "2" }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "access_token",
+      "value": ""
+    }
+  ]
+}
